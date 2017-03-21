@@ -31,6 +31,46 @@ public class Maze {
 
     }
 
+    public void assignBlock(){
+        for(int i = 0;i < ySize;i++) {
+            if (blockedX[0][i]) {
+                points[0][i].canMoveE = false;
+            }
+
+            if(blockedX[xSize - 2][i]){
+                points[xSize - 1][i].canMoveW = false;
+            }
+        }
+
+        for(int i = 1;i < xSize - 1;i++){
+            for(int j = 0;j < ySize;j++){
+                if(blockedX[i][j]){
+                    points[i][j].canMoveE = false;
+                    points[i+1][j].canMoveW = false;
+                }
+            }
+        }
+
+        for(int i = 0;i < xSize;i++){
+            if(blockedY[i][0]){
+                points[i][0].canMoveS = false;
+            }
+
+            if(blockedY[i][ySize - 2]){
+                points[i][ySize - 1].canMoveN = false;
+            }
+        }
+
+        for(int i = 1;i < ySize - 1;i++){
+            for(int j = 0;j < xSize;j++){
+                if(blockedX[i][j]){
+                    points[i][j].canMoveN = false;
+                    points[i][j+1].canMoveS = false;
+                }
+            }
+        }
+    }
+
     public void solve(){
 
     }

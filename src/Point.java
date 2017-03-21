@@ -7,19 +7,19 @@ public class Point {
     public Coordinate coord;
 
     public Point(){
-        canMoveE = false;
-        canMoveN = false;
-        canMoveS = false;
-        canMoveW = false;
+        canMoveE = true;
+        canMoveN = true;
+        canMoveS = true;
+        canMoveW = true;
         travelled = false;
         this.coord = new Coordinate();
     }
 
     public Point(int x, int y){
-        canMoveE = false;
-        canMoveN = false;
-        canMoveS = false;
-        canMoveW = false;
+        canMoveE = true;
+        canMoveN = true;
+        canMoveS = true;
+        canMoveW = true;
         travelled = false;
         this.coord = new Coordinate(x, y);
     }
