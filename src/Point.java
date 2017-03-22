@@ -24,4 +24,22 @@ public class Point {
         this.coord = new Coordinate(x, y);
     }
 
+    @Override
+    public String toString(){
+        String output = "Point at " + this.coord + "\nCan move ";
+        if(this.canMoveE){
+            output += "E ";
+        }
+        if(this.canMoveS){
+            output += "S ";
+        }
+        if(this.canMoveW){
+            output += "W ";
+        }
+        if(this.canMoveN){
+            output += "N ";
+        }
+        return output;
+    }
+
 }

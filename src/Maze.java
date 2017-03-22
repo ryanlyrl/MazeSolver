@@ -28,6 +28,7 @@ public class Maze {
         this.blockedX = blockedX;
         this.blockedY = blockedY;
 
+        assignBlock();
 
     }
 
@@ -72,7 +73,8 @@ public class Maze {
     }
 
     public void solve(){
-
+        Solver solver = new Solver();
+        solver.run();
     }
 
     @Override
