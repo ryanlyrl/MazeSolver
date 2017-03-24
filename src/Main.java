@@ -14,18 +14,23 @@ public class Main {
         }
 
 
-        block[0][1] = true;
-        block[2][2] = true;
+        //block[0][1] = true;
+        //block[2][2] = true;
         block2[0][0] = true;
-        block2[1][2] = true;
+        block2[0][1] = true;
+        block2[0][2] = true;
+        block2[0][3] = true;
+        block2[0][4] = true;
+        block2[0][6] = true;
 
 
         Maze maze = new Maze(7, 4, block, block2);
         Solver solve = new Solver(maze);
         System.out.println(solve);
-        for(int i = 0;i < solve.xSize;i++){
-            System.out.println(solve.points[i][0]);
-        }
+//        for(int i = 0;i < solve.xSize;i++){
+//            System.out.println(solve.points[i][0]);
+//        }
+        solve.run();
     }
 
 }
