@@ -21,9 +21,10 @@ public class Main {
 
 
         Maze maze = new Maze(7, 4, block, block2);
-        System.out.println(maze);
-        for(int i = 0;i < maze.xSize;i++){
-            System.out.println(maze.points[i][0]);
+        Solver solve = new Solver(maze);
+        System.out.println(solve);
+        for(int i = 0;i < solve.xSize;i++){
+            System.out.println(solve.points[i][0]);
         }
     }
 

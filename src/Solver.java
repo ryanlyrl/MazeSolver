@@ -38,4 +38,50 @@ public class Solver extends Maze {
         
     }
 
+    @Override
+    public String toString(){
+        int currentX = 0;
+        int currentY = 0;
+        for(int i = 0;i < ySize * 2 - 1;i++){
+            if(i % 2 == 0){
+                for(int j = 0;j < xSize - 1;j++){
+                    if(currentX == x && currentY == y) {
+                        System.out.print("B");
+                    } else {
+                        System.out.print("O");
+                    }
+
+                    if(blockedX[i/2][j]){
+                        System.out.print("--X--");
+                    } else {
+                        System.out.print("-----");
+                    }
+                    currentX++;
+                }
+                if(currentX == x && currentY == y) {
+                    System.out.println("B");
+                } else {
+                    System.out.println("O");
+                }
+                currentY++;
+            } else {
+                for(int k = 0;k < 3;k++) {
+                    for (int j = 0; j < xSize - 1; j++) {
+                        if(k == 1) {
+                            if(blockedY[i/2][j]) {
+                                System.out.print("X     ");
+                            } else {
+                                System.out.print("|     ");
+                            }
+                        } else {
+                            System.out.print("|     ");
+                        }
+                    }
+                    System.out.println("|");
+                }
+            }
+        }
+
+        return "";
+    }
 }
