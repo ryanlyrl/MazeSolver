@@ -21,15 +21,17 @@ public class Solver extends Maze {
     public void loop(){
         while(true) {
             Scanner in = new Scanner(System.in);
-           // if (in.nextLine().trim() == "") {
+           if (in.nextLine().trim().equals("")) {
                 move();
                 atIntersection();
-            System.out.println("(" + x + " ," + y + ")");
+                System.out.println("(" + x + " ," + y + ")");
                 for (int i = 0; i < 5; i++) {
                     System.out.println("");
                 }
                 System.out.println(this);
-           // }
+           } else {
+               System.out.println("no");
+           }
         }
     }
 
@@ -203,7 +205,7 @@ public class Solver extends Maze {
                 currentY++;
             } else {
                 for(int k = 0;k < 3;k++) {
-                    for (int j = 0; j < xSize - 1; j++) {
+                    for (int j = 0; j < xSize; j++) {
                         if(k == 1) {
                             if(blockedY[i/2][j]) {
                                 System.out.print("X     ");
@@ -214,7 +216,7 @@ public class Solver extends Maze {
                             System.out.print("|     ");
                         }
                     }
-                    System.out.println("|");
+                    System.out.println("");
                 }
             }
         }
