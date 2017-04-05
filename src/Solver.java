@@ -94,19 +94,53 @@ public class Solver extends Maze {
     }
 
     public char turnDirection(){
-        if(points[x][y].canMoveS){
-            if(points[x][y].canMoveE) {
-                if (6 - x >= 3 - y) {
-                    return 'E';
-                } else {
-                    return 'S';
-                }
-            } else {
-                return 'S';
+        int pE = 2;
+        int pW = 2;
+        int pN = 2;
+        int pS = 2;
+
+        if(x < 3){
+            pE--;
+        } else {
+            pS--;
+        }
+
+        if(!points[x][y].canMoveN) pN += 1000;
+        if(!points[x][y].canMoveS) pS += 1000;
+        if(!points[x][y].canMoveE) pE += 1000;
+        if(!points[x][y].canMoveW) pW += 1000;
+
+        if(points[x][y].canMoveN){
+            if(points[x][y-1].travelled){
+                pN++;
             }
-        }  else if(points[x][y].canMoveE){
+        }
+
+        if(points[x][y].canMoveS){
+            if(points[x][y+1].travelled){
+                pS++;
+            }
+        }
+
+        if(points[x][y].canMoveE){
+            if(points[x+1][y].travelled){
+                pE++;
+            }
+        }
+
+        if(points[x][y].canMoveW){
+            if(points[x-1][y].travelled){
+                pW++;
+            }
+        }
+
+        int[] array = {pN,pS,pE,pW};
+
+        if(pE <= pN && pE <= pS && pE <= pW){
             return 'E';
-        } else if(points[x][y].canMoveW){
+        } else if(pS <= pE && pS <= pW && pS <= pN){
+            return 'S';
+        } else if(pW <= pE && pW <= pN && pW <= pS){
             return 'W';
         } else {
             return 'N';
