@@ -58,32 +58,41 @@ public class Solver extends Maze {
         }
 
         boolean canMoveStraight = true;
+        boolean hasTravelled = false;
         switch (heading){
             case 'E':
                 if(!points[x][y].canMoveE){
                     canMoveStraight = false;
+                } else if(points[x+1][y].travelled){
+                    hasTravelled = true;
                 }
                 break;
             case 'S':
                 if(!points[x][y].canMoveS){
                     canMoveStraight = false;
+                } else if(points[x][y+1].travelled){
+                    hasTravelled = true;
                 }
                 break;
             case 'W':
                 if(!points[x][y].canMoveW){
                     canMoveStraight = false;
+                } else if(points[x-1][y].travelled){
+                    hasTravelled = true;
                 }
                 break;
             case 'N':
                 if(!points[x][y].canMoveN){
                     canMoveStraight = false;
+                } else if(points[x][y-1].travelled){
+                    hasTravelled = true;
                 }
                 break;
             default:
                 break;
         }
 
-        if(!canMoveStraight){
+        if(!canMoveStraight || hasTravelled){
             char turnDir = turnDirection();
             doTurn(heading, turnDir);
             heading = turnDir;
@@ -134,7 +143,10 @@ public class Solver extends Maze {
             }
         }
 
-        int[] array = {pN,pS,pE,pW};
+        System.out.println("PE: " + pE);
+        System.out.println("PS: " + pS);
+        System.out.println("PW: " + pW);
+        System.out.println("PN: " + pN);
 
         if(pE <= pN && pE <= pS && pE <= pW){
             return 'E';
