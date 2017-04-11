@@ -34,6 +34,7 @@ public class MazeSolver {
 //        maze.getTile(3, Y_SIZE - 1).type = 'B';
         //gui = new Gui();
         this.gui = gui;
+        //gui.start();
         robot = new Robot();
         maze.getTile(robot.x, robot.y).amountOfTimesMovedHere ++;
         turn();
@@ -47,6 +48,7 @@ public class MazeSolver {
 
         //gui = new Gui();
         this.gui = gui;
+        //gui.start();
         robot = new Robot();
         maze.getTile(robot.x, robot.y).amountOfTimesMovedHere ++;
         turn();

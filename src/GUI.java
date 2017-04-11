@@ -1,12 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 /**
  * Created by RobotStudent on 4/7/2017.
  */
-public class Gui {
+public class Gui implements Runnable {
     JFrame frame;
     Canvas canvas;
+
+    Thread t;
+
+    boolean isRunning = false;
 
     final int WIDTH = 1000;
     final int HEIGHT = 1000;
@@ -26,6 +32,13 @@ public class Gui {
 
     Robot robot;
 
+    ArrayList<Robot> robots;
+    ArrayList<Maze> mazes;
+
+    int currentI;
+
+
+
     public Gui() {
         frame = new JFrame();
         canvas = new Canvas();
@@ -35,15 +48,52 @@ public class Gui {
         frame.setLayout(null);
         frame.add(canvas);
         frame.setVisible(true);
+        robots = new ArrayList<>();
+        mazes = new ArrayList<>();
+        currentI = 0;
+        canvas.createBufferStrategy(2);
+        start();
     }
 
     public void draw(Maze maze, Robot robot) {
         this.maze = maze;
         this.robot = robot;
-        Graphics g = canvas.getGraphics();
+    }
+
+    private void start() {
+        t = new Thread(this);
+        t.start();
+    }
+
+    public void run() {
+        isRunning = true;
+        while (isRunning) {
+
+            try {
+                Thread.sleep(100);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            draw();
+        }
+    }
+
+    public void draw() {
+        if (maze == null && robot == null) {
+            BufferStrategy bufferStrategy = canvas.getBufferStrategy();
+            Graphics g = bufferStrategy.getDrawGraphics();
+            g.clearRect(0, 0, WIDTH, HEIGHT);
+            g.drawString("Waiting...", 20, 20);
+            bufferStrategy.show();
+            return;
+        }
+        BufferStrategy bufferStrategy = canvas.getBufferStrategy();
+        Graphics g = bufferStrategy.getDrawGraphics();
         g.setColor(Color.white);
         //Border Top
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+        //g.fillRect(0, 0, WIDTH, HEIGHT);
+        g.clearRect(0, 0, WIDTH, HEIGHT);
         g.setColor(COLOR_BORDER);
         for (int j = 0; j < maze.tiles[0].length + 2; j ++) {
             g.fillRect(j * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
@@ -81,6 +131,9 @@ public class Gui {
                 else if (mazeTile.isFlagged && mazeTile.type == 'O' && !isRobot ) {
                     g.setColor(Color.pink);
                 }
+                else if (mazeTile.wasAlreadyOn && mazeTile.type == 'I' && !isRobot) {
+                    g.setColor(Color.magenta);
+                }
 
                 g.fillRect((y * TILE_SIZE) + TILE_SIZE, (x * TILE_SIZE) + TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
@@ -93,6 +146,7 @@ public class Gui {
         for (int j = 0; j < maze.tiles[0].length + 2; j ++) {
             g.fillRect(j * TILE_SIZE, (maze.tiles.length * TILE_SIZE) + TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
+        bufferStrategy.show();
     }
 
 }
