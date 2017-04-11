@@ -116,9 +116,23 @@ public class MazeSolver {
                                 robot.direction = d;
                                 foundAPath = true;
                                 boolean isOpen = false;
-                                if (!mazeTile.wasAlreadyOn && notRedundant(mazeTile)) {
+                                System.out.println("Checking if the mazeTile 'isOpen'");
+                                //Scan Up, check If Was Already On the top block
+                                boolean wasAlreadyOnCheck = false;
+                                MazeTile mazeTileTwo = maze.scan(d, mazeTile.x, mazeTile.y);
+                                if (mazeTileTwo != null) {
+                                    wasAlreadyOnCheck = mazeTileTwo.wasAlreadyOn;
+                                }
+
+
+
+                                if ((!mazeTile.wasAlreadyOn && notRedundant(mazeTile) && !wasAlreadyOnCheck) || mazeTile.type == 'E') {
+                                    System.out.println("Was open");
                                     isOpen = true;
                                     amountOpenNotBeenOn ++;
+                                }
+                                else {
+                                    System.out.println("Was not open");
                                 }
                                 if (d == 'U') {
                                     if (isOpen) foundUp = 2;
@@ -281,6 +295,9 @@ public class MazeSolver {
             maze.getTile(robot.x, robot.y + 1).went[3] = true;
             maze.getTile(robot.x, robot.y + 1).amountOfTimesMovedHere ++;
         }
+        robot.move(robot.direction);
+        //Todo
+        maze.getTile(robot.x, robot.y).wasAlreadyOn = true;
         robot.move(robot.direction);
     }
 

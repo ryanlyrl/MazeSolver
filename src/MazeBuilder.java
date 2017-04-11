@@ -19,16 +19,16 @@ public class MazeBuilder {
     final int WIDTH = 500;
     final int HEIGHT = 500;
 
-    final int TILE_SIZE = 20;
+    final int TILE_SIZE = 40;
 
     final Color COLOR_OPEN = Color.white;
     final Color COLOR_CLOSED = Color.black;
     final Color COLOR_ROBOT = Color.red;
     final Color COLOR_END = Color.green;
 
+    final Color COLOR_INTERSECTION = Color.gray;
+
     static Gui gui;
-
-
 
     //final int X_SIZE = HEIGHT / TILE_SIZE;
     //final int Y_SIZE = WIDTH / TILE_SIZE;
@@ -58,6 +58,14 @@ public class MazeBuilder {
                     label = new JLabel("E");
                     label.setBackground(COLOR_END);
                 }
+                else if (y % 2 == 0 && x % 2 == 0) {
+                    label = new JLabel("I");
+                    label.setBackground(COLOR_INTERSECTION);
+                }
+                else if (y % 2 != 0 && x % 2 != 0) {
+                    label = new JLabel("X");
+                    label.setBackground(Color.blue);
+                }
                 else {
                     label = new JLabel("O");
                     label.setBackground(COLOR_OPEN);
@@ -67,6 +75,7 @@ public class MazeBuilder {
                 label.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        if (label.getText().equals("X") || label.getText().equals("I")) return;
                         if (label.getText().equals("O")) {
                             label.setText("B");
                             label.setBackground(COLOR_CLOSED);
@@ -142,6 +151,7 @@ public class MazeBuilder {
                 label.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        if (label.getText().equals("X") || label.getText().equals("I")) return;
                         if (label.getText().equals("O")) {
                             label.setText("B");
                             label.setBackground(COLOR_CLOSED);
@@ -249,6 +259,7 @@ public class MazeBuilder {
             System.out.println("OPTIONS: EB = open editor (blank), EL = open file to edit, L = load file and run");
             String option1 = new Scanner(System.in).nextLine();
             if (option1.equals("EB")) {
+                System.out.println("!!!ODD NUMBERS ONLY!!!");
                 System.out.println("X_SIZE:");
                 int xSize = Integer.parseInt(new Scanner(System.in).nextLine());
                 System.out.println("Y_SIZE:");

@@ -8,15 +8,17 @@ public class Gui {
     JFrame frame;
     Canvas canvas;
 
-    final int WIDTH = 500;
-    final int HEIGHT = 500;
+    final int WIDTH = 1000;
+    final int HEIGHT = 1000;
 
-    final int TILE_SIZE = 30;
+    final int TILE_SIZE = 50;
 
     final Color COLOR_OPEN = Color.white;
     final Color COLOR_CLOSED = Color.black;
     final Color COLOR_ROBOT = Color.red;
     final Color COLOR_END = Color.green;
+
+    final Color COLOR_INTERSECTION = Color.gray;
 
     final Color COLOR_BORDER = Color.blue;
 
@@ -64,6 +66,13 @@ public class Gui {
                 }
                 else if (mazeTile.type == 'E') {
                     g.setColor(COLOR_END);
+                }
+                else if (mazeTile.type == 'I') {
+                    g.setColor(COLOR_INTERSECTION);
+                }
+
+                else if (mazeTile.type == 'X') {
+                    g.setColor(COLOR_BORDER);
                 }
 
                 if (mazeTile.isFlagged && mazeTile.type == 'B') {

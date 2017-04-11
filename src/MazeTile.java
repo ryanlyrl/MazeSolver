@@ -25,6 +25,8 @@ public class MazeTile {
     'B' : Barrier
     'O' : Open
     'E' : End
+    'P' : Path
+    'X' : Empty
     */
 
     char type;
